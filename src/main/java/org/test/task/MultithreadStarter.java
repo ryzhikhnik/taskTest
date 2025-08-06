@@ -17,14 +17,17 @@ public class MultithreadStarter {
             new ReentrantLock()
     );
 
+    // Инициализируем список с информацией о потоках, взятой из ТЗ
     private final List<ThreadInfo> threadInfoList = List.of(
             new ThreadInfo(10, 3, 12),
             new ThreadInfo(5, 2, 7)
     );
 
     public void start() {
+        // Создаём пул потоков, соответствующий количеству задач
         ExecutorService executorService = Executors.newFixedThreadPool(threadInfoList.size());
 
+        // Запускаем все задачи - каждая с разным периодом и интервалом
         threadInfoList.stream()
                 .map(threadInfo -> new WorkImitationThread(threadInfo, locks))
                 .forEach(executorService::execute);
