@@ -31,5 +31,7 @@ public class MultithreadStarter {
         threadInfoList.stream()
                 .map(threadInfo -> new WorkImitationThread(threadInfo, locks))
                 .forEach(executorService::execute);
+
+        executorService.shutdown();
     }
 }
